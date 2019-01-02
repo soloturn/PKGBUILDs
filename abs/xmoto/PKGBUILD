@@ -5,7 +5,7 @@
 
 pkgname=xmoto
 pkgver=0.5.11
-pkgrel=6
+pkgrel=7
 pkgdesc="A challenging 2D motocross platform game, where physics play an important role."
 arch=('i686' 'x86_64')
 url="http://xmoto.tuxfamily.org"
@@ -14,13 +14,19 @@ depends=('libjpeg' 'libpng' 'lua52' 'sdl_mixer' 'ode' 'curl' 'sqlite' 'sdl_ttf'
          'sdl_net' 'glu' 'libxdg-basedir' 'libxml2')
 makedepends=('mesa')
 source=("http://download.tuxfamily.org/${pkgname}/${pkgname}/${pkgver}/${pkgname}-${pkgver}-src.tar.gz"
+        'gcc-7.patch'
+        'utf8.patch'
         'lua52_compat.patch')
 sha1sums=('a795616fb359e60be343e339f7acf5e95e0f1ce2'
+          'd30fad6a138de36566c5343ea04e6c7141e767f8'
+          '1a64966b887ecbd7280d97988cd8526813820611'
           '104542546fbbd24172ddaa179f87e1b26df8b761')
 
 prepare() {
   cd "${srcdir}/${pkgname}-${pkgver}"
 
+  patch -Np1 -i "${srcdir}/gcc-7.patch"
+  patch -Np1 -i "${srcdir}/utf8.patch"
   patch -Np1 -i "${srcdir}/lua52_compat.patch"
   ./bootstrap
 
