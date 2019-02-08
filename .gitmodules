@@ -1,0 +1,6 @@
+[submodule "aur/xmoto"]
+	path = aur/xmoto
+	url = ssh://aur@aur.archlinux.org/xmoto.git
+[submodule "aur/xmoto-git"]
+	path = aur/xmoto-git
+	url = ssh://aur@aur.archlinux.org/xmoto-git.git
