@@ -18,13 +18,13 @@ source=("avidemux::git://github.com/mean00/avidemux2.git")
 sha256sums=('SKIP')
 
 prepare() {
-  cd ${pkgbase}_${pkgver}
+  cd ${pkgbase}
   sed -i 's|../avidemux/qt4|../avidemux/qt4 -DLRELEASE_EXECUTABLE=/usr/bin/lrelease-qt5|' bootStrap.bash
   sed -e 's|0.19|1.0|' -i avidemux_plugins/ADM_videoFilters6/ass/CMakeLists.txt
 }
 
 build() {
-  cd ${pkgbase}_${pkgver}
+  cd ${pkgbase}
   bash bootStrap.bash --with-core --with-cli --with-plugins
 }
 
@@ -50,7 +50,7 @@ package_avidemux-cli() {
   conflicts=("avidemux-cli")
   provides=("avidemux-cli")
 
-  cd ${pkgbase}_${pkgver}
+  cd ${pkgbase}
   make -C buildCli DESTDIR="${pkgdir}" install
   make -C buildCore DESTDIR="${pkgdir}" install
   make -C buildPluginsCLI DESTDIR="${pkgdir}" install
@@ -67,7 +67,7 @@ package_avidemux-qt() {
   conflicts=("avidemux-qt")
   provides=("avidemux-qt")
 
-  cd ${pkgbase}_${pkgver}
+  cd ${pkgbase}
   make -C buildQt5 DESTDIR="${pkgdir}" install
   make -C buildPluginsQt5 DESTDIR="${pkgdir}" install
   #install -Dm 644 avidemux-qt.desktop -t "${pkgdir}/usr/share/applications"
